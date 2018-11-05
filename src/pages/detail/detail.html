@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>{{newNote.tittle}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content *ngIf="show">
+  <ion-fab top right edge>
+    <button ion-fab color="secondary" (click)="gotoEditNote();"><ion-icon name="nutrition"></ion-icon></button>
+  </ion-fab>
+  <ion-card>
+    <ion-card-content> {{newNote.description}} </ion-card-content>
+  </ion-card>
+  <button class="center" ion-fab color="danger" (click) = "presentConfirm();"><ion-icon name="trash"></ion-icon></button> 
+</ion-content>

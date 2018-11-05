@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>editNote</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+      <ion-item>
+        <ion-label floating >Tittle</ion-label>
+        <ion-input type="text" [(ngModel)] = 'newNote.tittle'></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating >Information</ion-label>
+        <ion-textarea rows="15" [(ngModel)] = 'newNote.description'></ion-textarea>
+      </ion-item>
+    </ion-list>
+    <div padding>
+      <button round (click)="changeNote();" ion-button block>Edit Note</button>
+    </div>
+</ion-content>
