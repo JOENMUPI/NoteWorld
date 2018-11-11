@@ -38,14 +38,7 @@ export class RegisterPage {
     try{
       await this.afAuth.auth.createUserWithEmailAndPassword(this.user.usr, this.user.pass);
       this.user.usr = this.user.usr.split("@")[0];
-      this.noteService.register(this.user);
       this.presentConfirm();
-    }
-
-    catch(e){ this.errorConfirm(e); }
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
+    } catch(e){ this.errorConfirm(e); }
   }
 }

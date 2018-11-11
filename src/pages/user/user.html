@@ -6,17 +6,21 @@
 
 <ion-content>
     <ion-fab top right edge>
-       <button ion-fab color="secondary" (click) = "gotoNewNote();"><ion-icon name="add"></ion-icon></button>
+       <button ion-fab color="secondary" (click) = "gotoNewNote();">
+           <ion-icon name="add"></ion-icon></button>
     </ion-fab>
             
     <ion-fab right bottom>
-        <button ion-fab color="light"  (click) = "gotoHome();"><ion-icon name="undo"></ion-icon></button>
+        <button ion-fab color="light"  (click) = "gotoHome();"><ion-icon name="md-log-out"></ion-icon></button>
     </ion-fab>  
     
     <ion-list>
         <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
         <ion-item-sliding *ngFor= "let note of notes">
-            <ion-item> {{note.tittle}} </ion-item>
+            <ion-item>  
+                {{note.tittle}}
+                <p>{{note.description}}</p>
+            </ion-item>
             <ion-item-options side="right">
             <button  ion-button color="light" (click)="gotoDetail(note.id);"><ion-icon name="eye"></ion-icon></button>
             <button  ion-button color="secondary" (click)="gotoEditNote(note.id);"><ion-icon name="nutrition"></ion-icon></button>

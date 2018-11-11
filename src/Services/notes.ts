@@ -11,8 +11,7 @@ export class note {
     }
 
     public getNote(ide, user) {
-        console.log('note/' + user + '/' + ide);
-        return this.afDB.object('note/' + user + '/' + ide).valueChanges();
+        return this.afDB.object('note/' + user + '/' + ide).valueChanges();  
     }
     
     public addNote(note, user) {
@@ -25,13 +24,5 @@ export class note {
 
     public deleteNote(ide, user) {
         this.afDB.database.ref('note/' + user + '/' + ide).remove();
-    }
-
-    public login(user){
-        return this.afDB.list("note/userx/" + user.usr).valueChanges();
-    }
-
-    public register(user){
-        this.afDB.database.ref('note/userx/'+ user.usr).set(user);
     }
 }

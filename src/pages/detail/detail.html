@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header *ngIf="show">
   <ion-navbar color="primary">
     <ion-title>{{newNote.tittle}}</ion-title>
   </ion-navbar>
@@ -11,5 +11,5 @@
   <ion-card>
     <ion-card-content> {{newNote.description}} </ion-card-content>
   </ion-card>
-  <button class="center" ion-fab color="danger" (click) = "presentConfirm();"><ion-icon name="trash"></ion-icon></button> 
+  <button class="center" ion-fab color="danger" (click) = "removeNote();"><ion-icon name="trash"></ion-icon></button> 
 </ion-content>

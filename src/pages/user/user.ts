@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavParams, IonicPage, NavController } from 'ionic-angular';
+import { NavParams, IonicPage, NavController, LoadingController } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
 import{ note } from "../../Services/notes";
 import { DetailPage } from '../detail/detail';
@@ -18,8 +18,12 @@ export class UserPage {
   notesAux = [];
 
   @ViewChild('myNav') nav : NavController
-  constructor(public alertCtrl: AlertController, public modalCtrl: ModalController, public navParams: NavParams, public navCtrl: NavController, public noteService : note) {
+  constructor(public loadingCtrl: LoadingController, public alertCtrl: AlertController, public modalCtrl: ModalController, public navParams: NavParams, public navCtrl: NavController, public noteService : note) {
     this.noteService.getNotes(this.navParams.get('user')).subscribe(not => { this.notes = not;  this.notesAux = not; });
+      this.loadingCtrl.create({
+        content: "Please wait...",
+        duration: 1000
+      }).present();
   }
 
   public getItems(ev: any) {
@@ -67,9 +71,5 @@ export class UserPage {
 
   public gotoHome(){
     this.modalCtrl.create(HomePage).present();
-  }
-  
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UserPage');
   }
 }

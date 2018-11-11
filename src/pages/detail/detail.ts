@@ -9,39 +9,42 @@ import { EditNotePage } from '../edit-note/edit-note';
   templateUrl: 'detail.html',
 })
 export class DetailPage {
-  newNote = {id: null, tittle: null, description: null };
+  newNote = { id: null, tittle: null, description: null };
   show = true;
 
   constructor(public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public noteService : note) {
-    noteService.getNote(navParams.get('id'), navParams.get('user')).subscribe((note)=>{ this.newNote =  note;});
+    try{ 
+      noteService.getNote(navParams.get('id'), navParams.get('user')).subscribe((note)=>{ 
+        this.newNote = JSON.parse(JSON.stringify(note)); 
+      }); 
+    } catch(e){ console.log(e); }
   }
 
-  public removeNote(){
+  public removeNotex(){
     this.show = false;
     this.noteService.deleteNote(this.newNote.id, this.navParams.get('user'))
     this.navCtrl.pop();
   }
 
-  public presentConfirm() {
+  public removeNote() {
     this.alertCtrl.create({
       title: 'Confirm remove',
       message: 'Do you want eliminated this note?',
       buttons: [{
         text: 'No',
         role: 'cancel',
-        handler: () => {}
       }, {
         text: 'Yes',
-        handler: () => { this.removeNote(); }
+        handler: () => { 
+          this.show = false;
+          this.noteService.deleteNote(this.newNote.id, this.navParams.get('user'))
+          this.navCtrl.pop() 
+        }
       }]
     }).present();
   }
 
   public gotoEditNote(){
     this.navCtrl.push(EditNotePage , { id: this.navParams.get('id'), user: this.navParams.get('user') });
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DetailPage');
   }
 } 
